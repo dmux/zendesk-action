@@ -1,0 +1,30 @@
+name: "Create Ticket"
+description: "Action to create tickets using an external API"
+inputs:
+  zendesk_api_url:
+    description: "API URL to create tickets"
+    required: true
+  zendesk_api_token:
+    description: "Authentication token for the API"
+    required: true
+  zendesk_ticket_title:
+    description: "Ticket title"
+    required: true
+  zendesk_ticket_description:
+    description: "Ticket description"
+    required: false
+  zendesk_recipients:
+    description: "Comma-separated list of recipients"
+    required: true
+  zendesk_cc:
+    description: "Comma-separated list of CC emails"
+    required: false
+  zendesk_bcc:
+    description: "Comma-separated list of BCC emails"
+    required: false
+outputs:
+  ticket_id:
+    description: "ID of the created ticket"
+runs:
+  using: "node16"
+  main: "dist/index.js"
