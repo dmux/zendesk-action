@@ -10,6 +10,12 @@ inputs:
   zendesk_api_token:
     description: "Authentication token for the API"
     required: true
+  zendesk_requester_name:
+    description: "Requester name"
+    required: true
+  zendesk_requester_email:
+    description: "Requester email"
+    required: true
   zendesk_ticket_title:
     description: "Ticket title"
     required: true
