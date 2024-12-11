@@ -32,6 +32,9 @@ async function run() {
       bcc: bcc ? cc.split(",") : [],
     };
 
+    console.log("Zendesk API URL:", apiUrl);
+    console.log("Zendesk API User:", apiUser);
+
     console.log("Creating ticket with the following data:");
     console.log(ticketData);
 
@@ -49,7 +52,7 @@ async function run() {
         comment: {
           body: ticketData.description,
         },
-        priority: "normal",
+        priority: "urgent",
         subject: ticketData.title,
       },
     });
