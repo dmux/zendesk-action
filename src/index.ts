@@ -38,7 +38,7 @@ async function run() {
     console.log("Creating ticket with the following data:");
     console.log(ticketData);
 
-    const data = JSON.stringify({
+    const data = {
       ticket: {
         requester: {
           name: requesterName,
@@ -55,7 +55,7 @@ async function run() {
         priority: "urgent",
         subject: ticketData.title,
       },
-    });
+    };
 
     console.log("Ticket data:");
     console.log(data);
