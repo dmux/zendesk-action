@@ -4,6 +4,9 @@ inputs:
   zendesk_api_url:
     description: "API URL to create tickets"
     required: true
+  zendesk_api_user:
+    description: "Username for the API"
+    required: true
   zendesk_api_token:
     description: "Authentication token for the API"
     required: true

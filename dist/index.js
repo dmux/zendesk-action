@@ -28393,12 +28393,19 @@ dotenv.config();
 async function run() {
     try {
         const apiUrl = core.getInput("zendesk_api_url", { required: true });
+        const apiUser = core.getInput("zendesk_api_user", { required: true });
         const apiToken = core.getInput("zendesk_api_token", { required: true });
         const ticketTitle = core.getInput("zendesk_ticket_title", {
             required: true,
         });
         const ticketDescription = core.getInput("zendesk_ticket_description", {
             required: false,
+        });
+        const requesterName = core.getInput("zendesk_requester_name", {
+            required: true,
+        });
+        const requesterEmail = core.getInput("zendesk_requester_email", {
+            required: true,
         });
         const recipients = core.getInput("zendesk_recipients", { required: true });
         const cc = core.getInput("zendesk_cc", { required: false });
@@ -28410,9 +28417,23 @@ async function run() {
             cc: cc ? cc.split(",") : [],
             bcc: bcc ? cc.split(",") : [],
         };
-        const response = await axios_1.default.post(apiUrl, ticketData, {
+        const data = JSON.stringify({
+            ticket: {
+                requester: {
+                    name: requesterName,
+                    email: requesterEmail,
+                },
+                email_ccs: ticketData.cc,
+                comment: {
+                    body: ticketData.description,
+                },
+                priority: "normal",
+                subject: ticketData.title,
+            },
+        });
+        const response = await axios_1.default.post(apiUrl, data, {
             headers: {
-                Authorization: `Bearer ${apiToken}`,
+                Authorization: `Basic ${Buffer.from(`${apiUser}/token:${apiToken}`).toString("base64")}`,
                 "Content-Type": "application/json",
             },
         });

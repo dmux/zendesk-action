@@ -8,23 +8,9 @@ This action allows you to interact with the Zendesk API.
 name: Create Ticket
 
 on:
-  workflow_dispatch:
-    inputs:
-      zendesk_ticket_title:
-        description: "Ticket title"
-        required: true
-      zendesk_ticket_description:
-        description: "Ticket description"
-        required: false
-      zendesk_recipients:
-        description: "List of recipients (comma-separated)"
-        required: true
-      zendesk_cc:
-        description: "List of CC emails (comma-separated)"
-        required: false
-      zendesk_bcc:
-        description: "List of BCC emails (comma-separated)"
-        required: false
+  push:
+    branches:
+      - main
 jobs:
   create-ticket:
     runs-on: ubuntu-latest
@@ -33,6 +19,7 @@ jobs:
         uses: dmux/zendesk-action@v1
         with:
           api_url: ${{ secrets.ZENDESK_API_URL }}
+          api_user: ${{ secrets.ZENDESK_API_USER }}
           api_token: ${{ secrets.ZENDESK_API_TOKEN }}
           ticket_title: ${{ github.event.inputs.zendesk_ticket_title }}
           ticket_description: ${{ github.event.inputs.zendesk_ticket_description }}
