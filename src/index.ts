@@ -56,6 +56,9 @@ async function run() {
     console.log(data);
 
     console.log("Sending request to Zendesk API...");
+    console.log(
+      `Basic ${Buffer.from(`${apiUser}/token:${apiToken}`).toString("base64")}`
+    );
 
     const response = await axios.post(apiUrl, data, {
       headers: {
