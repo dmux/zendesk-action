@@ -38,24 +38,19 @@ async function run() {
     console.log("Creating ticket with the following data:");
     console.log(ticketData);
 
-    const data = {
+    const data = JSON.stringify({
       ticket: {
         requester: {
           name: requesterName,
           email: requesterEmail,
         },
-        ...(ticketData.cc.length > 0 && {
-          email_ccs: ticketData.recipients.map((recipient: any) => ({
-            user_email: recipient,
-          })),
-        }),
         comment: {
           body: ticketData.description,
         },
         priority: "urgent",
         subject: ticketData.title,
       },
-    };
+    });
 
     console.log("Ticket data:");
     console.log(data);
