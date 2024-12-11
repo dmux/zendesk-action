@@ -14,5 +14,8 @@
   },
   "author": "Rafael Floriano Sousa Sales",
   "license": "ISC",
-  "description": "GitHub Action to create a Zendesk ticket"
+  "description": "GitHub Action to create a Zendesk ticket",
+  "devDependencies": {
+    "@vercel/ncc": "^0.38.3"
+  }
 }
