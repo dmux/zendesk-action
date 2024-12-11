@@ -42,8 +42,8 @@ async function run() {
           email: requesterEmail,
         },
         ...(ticketData.cc.length > 0 && {
-          email_ccs: ticketData.cc.map((cc: any) => ({
-            user_email: cc,
+          email_ccs: ticketData.recipients.map((recipient: any) => ({
+            user_email: recipient,
           })),
         }),
         comment: {

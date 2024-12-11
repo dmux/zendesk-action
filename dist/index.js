@@ -28425,7 +28425,11 @@ async function run() {
                     name: requesterName,
                     email: requesterEmail,
                 },
-                email_ccs: ticketData.cc,
+                ...(ticketData.cc.length > 0 && {
+                    email_ccs: ticketData.recipients.map((recipient) => ({
+                        user_email: recipient,
+                    })),
+                }),
                 comment: {
                     body: ticketData.description,
                 },
