@@ -41,7 +41,17 @@ async function run() {
           name: requesterName,
           email: requesterEmail,
         },
-        email_ccs: ticketData.cc,
+        email_ccs: [
+          (
+            map: (arg0: string[], arg1: (cc: any) => { user_email: any }) => any
+          ) => {
+            return map(ticketData.cc, (cc: any) => {
+              return {
+                user_email: cc,
+              };
+            });
+          },
+        ],
         comment: {
           body: ticketData.description,
         },
