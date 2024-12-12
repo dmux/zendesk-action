@@ -27,9 +27,15 @@ async function run() {
     const ticketData = {
       title: ticketTitle,
       description: ticketDescription || "No description provided.",
-      recipients: recipients.split(",").map((email) => email.trim()),
-      cc: cc ? cc.split(",").map((email) => email.trim()) : [],
-      bcc: bcc ? bcc.split(",").map((email) => email.trim()) : [],
+      recipients:
+        recipients.split(",").map((email) => ({ user_email: email.trim() })) ||
+        [],
+      cc: cc
+        ? cc.split(",").map((email) => ({ user_email: email.trim() }))
+        : [],
+      bcc: bcc
+        ? bcc.split(",").map((email) => ({ user_email: email.trim() }))
+        : [],
     };
 
     const containsHtmlTags = /<\/?[a-z][\s\S]*>/i.test(ticketData.description);
