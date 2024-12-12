@@ -56,9 +56,6 @@ async function run() {
     console.log(data);
 
     console.log("Sending request to Zendesk API...");
-    console.log(
-      `Basic ${Buffer.from(`${apiUser}/token:${apiToken}`).toString("base64")}`
-    );
 
     const response = await axios.post(apiUrl, data, {
       headers: {
@@ -71,6 +68,9 @@ async function run() {
     core.setOutput("ticket_id", response.data.id);
     console.log(`Ticket created successfully: ${response.data.id}`);
   } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      console.error("Error response data:", error.response.data);
+    }
     core.setFailed(`Failed to create ticket: ${(error as Error).message}`);
   }
 }
