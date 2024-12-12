@@ -41,8 +41,8 @@ async function run() {
     const data = JSON.stringify({
       ticket: {
         requester: {
-          name: "Teste",
-          email: "teste@teste.com",
+          name: requesterName,
+          email: requesterEmail,
         },
         comment: {
           body: "The smoke is very colorful.",
