@@ -53,8 +53,7 @@ async function run() {
     });
 
     console.log("Ticket data:");
-    console.log(data);
-
+    console.log(JSON.stringify(data, null, 2));
     console.log("Sending request to Zendesk API...");
 
     const response = await axios.post(apiUrl, data, {
