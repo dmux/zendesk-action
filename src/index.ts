@@ -32,30 +32,20 @@ async function run() {
       bcc: bcc ? cc.split(",") : [],
     };
 
-    console.log("Zendesk API URL:", apiUrl);
-    console.log("Zendesk API User:", apiUser);
-
-    console.log("Creating ticket with the following data:");
-    console.log(ticketData);
-
     const data = {
       ticket: {
         requester: {
           name: requesterName,
           email: requesterEmail,
         },
+        email_ccs: ticketData.cc,
         comment: {
-          body: "The smoke is very colorful.",
+          body: ticketData.description,
         },
-        priority: "urgent",
-        subject: "My printer is on fire!",
+        priority: "normal",
+        subject: ticketData.title,
       },
     };
-
-    console.log("Ticket data:");
-    console.log(data);
-
-    console.log("Sending request to Zendesk API...");
 
     const response = await axios.post(apiUrl, data, {
       headers: {
