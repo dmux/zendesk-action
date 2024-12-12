@@ -27,9 +27,9 @@ async function run() {
     const ticketData = {
       title: ticketTitle,
       description: ticketDescription || "No description provided.",
-      recipients: recipients.split(","),
-      cc: cc ? cc.split(",") : [],
-      bcc: bcc ? cc.split(",") : [],
+      recipients: recipients.split(",").map((email) => email.trim()),
+      cc: cc ? cc.split(",").map((email) => email.trim()) : [],
+      bcc: bcc ? bcc.split(",").map((email) => email.trim()) : [],
     };
 
     const containsHtmlTags = /<\/?[a-z][\s\S]*>/i.test(ticketData.description);
@@ -40,7 +40,7 @@ async function run() {
           name: requesterName,
           email: requesterEmail,
         },
-        email_ccs: ticketData.cc,
+        email_ccs: ticketData.recipients,
         comment: containsHtmlTags
           ? {
               html_body: ticketData.description, // Use html_body if description contains HTML tags
