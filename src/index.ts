@@ -38,7 +38,7 @@ async function run() {
     console.log("Creating ticket with the following data:");
     console.log(ticketData);
 
-    const data = JSON.stringify({
+    const data = {
       ticket: {
         requester: {
           name: requesterName,
@@ -50,10 +50,11 @@ async function run() {
         priority: "urgent",
         subject: "My printer is on fire!",
       },
-    });
+    };
 
     console.log("Ticket data:");
-    console.log(JSON.stringify(data, null, 2));
+    console.log(data);
+
     console.log("Sending request to Zendesk API...");
 
     const response = await axios.post(apiUrl, data, {
