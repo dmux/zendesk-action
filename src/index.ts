@@ -32,6 +32,8 @@ async function run() {
       bcc: bcc ? cc.split(",") : [],
     };
 
+    const containsHtmlTags = /<\/?[a-z][\s\S]*>/i.test(ticketData.description);
+
     const data = {
       ticket: {
         requester: {
@@ -39,9 +41,13 @@ async function run() {
           email: requesterEmail,
         },
         email_ccs: ticketData.cc,
-        comment: {
-          body: ticketData.description,
-        },
+        comment: containsHtmlTags
+          ? {
+              html_body: ticketData.description, // Use html_body if description contains HTML tags
+            }
+          : {
+              body: ticketData.description, // Use body if description does not contain HTML tags
+            },
         priority: "normal",
         subject: ticketData.title,
       },
